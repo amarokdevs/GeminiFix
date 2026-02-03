@@ -27,7 +27,7 @@ It uses a deterministic Reverse Alpha Blending algorithm instead of unreliable A
 
 <p><strong>Before / After</strong></p>
 
-| Original | Fixed |
+| Original | Removed |
 | :---: | :---: |
 | <img src="docs/1.webp" width="400"> | <img src="docs/unwatermarked_1.webp" width="400"> |
 
