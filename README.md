@@ -121,23 +121,40 @@ By capturing the watermark over known solid backgrounds, GeminiFix reconstructs 
 
 geminifix/
 ├── public/
+
 │   ├── index.html
+
 │   └── terms.html
+
 ├── src/
+
 │   ├── core/
+
 │   │   ├── alphaMap.js
+
 │   │   ├── blendModes.js
+
 │   │   └── watermarkEngine.js
+
 │   ├── assets/
-│   │   ├── bg_48.png
-│   │   └── bg_96.png
-│   ├── i18n/
+
+│   │   ├── bg_.png
+
+│   │   └── bg_.png
+
+│   ├── dpk/
+
 │   ├── userscript/
+
 │   ├── app.js
+
 │   └── i18n.js
 ├── dist/
+
 ├── build.js
+
 └── package.json
+
 
 ---
 
