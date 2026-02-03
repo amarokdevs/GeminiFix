@@ -1,10 +1,10 @@
-# GeminiFix – Lossless Watermark Remover
+# Gemini Watermark Remover – Lossless Watermark Remover
 
-GeminiFix is a high-performance, 100% client-side tool designed to remove Gemini AI visible watermarks with mathematical precision.
+Gemini Watermark Remover is a high-performance, 100% client-side tool designed to remove Gemini AI visible watermarks with mathematical precision.
 It uses a deterministic Reverse Alpha Blending algorithm instead of unreliable AI inpainting, ensuring zero-loss restoration wherever possible.
 
 <p align="center">
-  <img src="https://count.getloli.com/@geminifix?name=geminifix&theme=minecraft&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" width="400">
+  <img src="https://count.getloli.com/@gemini-watermark-remover?name=gemini-watermark-remover&theme=minecraft&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" width="400">
 </p>
 
 ---
@@ -39,7 +39,7 @@ It uses a deterministic Reverse Alpha Blending algorithm instead of unreliable A
 
 USE AT YOUR OWN RISK
 
-GeminiFix modifies image pixel data. Although designed to be deterministic and safe, results may vary due to:
+Gemini Watermark Remover modifies image pixel data. Although designed to be deterministic and safe, results may vary due to:
 
 - Changes in Gemini watermark rendering
 - Corrupted or unsupported image formats
@@ -49,13 +49,13 @@ By using this tool, you accept full responsibility for any outcomes.
 The author is not liable for data loss or unintended image modification.
 
 Privacy Notice:
-GeminiFix is designed to operate entirely on the client side.
+Gemini Watermark Remover is designed to operate entirely on the client side.
 
 For transparency about how data is handled, please review the Privacy Policy:
-https://github.com/amarokdevs/GeminiFix/blob/main/privacy.txt
+https://github.com/amarokdevs/gemini-watermark-remover/blob/main/privacy.txt
 
 To ensure correct image processing, browser extensions that modify or protect canvas output
-(such as canvas or fingerprint defender extensions) should be disabled while using GeminiFix.
+(such as canvas or fingerprint defender extensions) should be disabled while using Gemini Watermark Remover.
 These extensions may interfere with pixel-level operations.
 
 ---
@@ -65,7 +65,7 @@ These extensions may interfere with pixel-level operations.
 ### Userscript (Gemini Conversation Pages)
 
 1. Install a userscript manager (Tampermonkey or Greasemonkey)
-2. Install the GeminiFix userscript
+2. Install the Gemini Watermark Remover userscript
 3. Open any Gemini conversation
 4. Use “Copy Image” or “Download Image”
    → Watermark is removed automatically
@@ -104,13 +104,13 @@ Where:
 
 ---
 
-### Reverse Alpha Blending (GeminiFix)
+### Reverse Alpha Blending (Gemini Watermark Remover)
 
 To recover the original pixel:
 
 original = (watermarked − α × logo) / (1 − α)
 
-By capturing the watermark over known solid backgrounds, GeminiFix reconstructs the exact alpha map and reverses the blend with no AI guessing.
+By capturing the watermark over known solid backgrounds, Gemini Watermark Remover reconstructs the exact alpha map and reverses the blend with no AI guessing.
 
 ---
 
@@ -128,36 +128,21 @@ By capturing the watermark over known solid backgrounds, GeminiFix reconstructs 
 gemini-watermark-remover/
 ├── .idx/
 │   └── dev.nix
-│
 ├── docs/
 │   ├── 1.webp
 │   └── unwatermarked_1.webp
-│
 ├── node_modules/
-│
 ├── public/
 │   ├── index.html
-
 │   └── terms.html
 ├── src/
-│   ├── core/
-
-│   │   ├── alphaMap.js
-
-│   │   ├── blendModes.js
-
-│   │   └── watermarkEngine.js
 │   ├── assets/
 │   │   ├── bg_48.png
 │   │   └── bg_96.png
-│   ├── i18n/
-│   ├── userscript/
-
+│   ├── dpk/
+│   │   └── en-US.json
 │   ├── app.js
-
-│   └── i18n.js
-│
-├── dist/
+│   └── dpk.js
 ├── build.js
 └── package.json
 
@@ -207,7 +192,7 @@ Independent research & implementation by the Deepak Dev.
 
 ## ⚖️ Legal Notice
 
-GeminiFix is intended for personal and educational use only.
+Gemini Watermark Remover is intended for personal and educational use only.
 
 Users are responsible for complying with all applicable laws, licenses, and terms of service.
 This project does not encourage copyright infringement or misuse.
