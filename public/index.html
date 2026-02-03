@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Watermark Remover | Professional AI Image Fix</title>
+  <meta name="description" content="Clean, professional Gemini AI watermark remover. Local browser processing ensures your privacy.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f7ff',
+              100: '#ebf0fe',
+              200: '#dae3fd',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#1e1b4b',
+            }
+          },
+          backgroundImage: {
+            'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z' fill='%23ffffff' fill-opacity='0.02'/%3E%3C/svg%3E\")",
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #030712;
+      color: #f9fafb;
+      overflow-x: hidden;
+    }
+
+    .glass {
+      background: rgba(17, 24, 39, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-card {
+      background: rgba(31, 41, 55, 0.4);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      background: rgba(31, 41, 55, 0.6);
+    }
+
+    .checkerboard {
+      background-image: 
+        linear-gradient(45deg, #1f2937 25%, transparent 25%), 
+        linear-gradient(-45deg, #1f2937 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, #1f2937 75%), 
+        linear-gradient(-45deg, transparent 75%, #1f2937 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      background-color: #111827;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-bottom: 0.1em;
+    }
+
+    .drop-zone-active {
+      border-color: #6366f1 !important;
+      background: rgba(99, 102, 241, 0.1) !important;
+      transform: scale(1.01);
+    }
+
+    @keyframes pulse-soft {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    .animate-pulse-soft {
+      animation: pulse-soft 2s infinite ease-in-out;
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(120px) scale(0.94);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .reveal-on-scroll.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #030712; }
+    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <div class="fixed inset-0 -z-10 bg-grid-pattern"></div>
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 -z-10 w-full max-w-7xl h-[600px] opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-colors-indigo-500)_0%,_transparent_70%)]"></div>
+
+  <header class="sticky top-0 z-50 glass border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="m12 3-1.9 5.8-5.8 1.9 5.8 1.9 1.9 5.8 1.9-5.8 5.8-1.9-5.8-1.9Z"></path>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-lg font-bold tracking-tight leading-tight">GeminiFix</span>
+          <span class="text-[10px] uppercase tracking-widest text-indigo-400 font-bold">Pro Watermark Remover</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+        <a href="https://github.com/amarokdevs/GeminiFix/blob/main/README.md" target="_blank" class="hover:text-white transition-colors">How it works</a>
+        <a href="https://github.com/amarokdevs/GeminiFix/blob/main/privacy.txt" target="_blank" class="hover:text-white transition-colors">Privacy</a>
+        <a href="https://github.com/amarokdevs/GeminiFix.git" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          Github
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
+    <div class="text-center mb-16 relative min-h-[80vh] flex flex-col justify-center items-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+        </span>
+        V2.0 NOW LIVE - IMPROVED ALGORITHM
+      </div>
+      <h1 class="text-[7.5vw] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 gradient-text leading-[1.15] py-2 whitespace-nowrap overflow-hidden">
+        Remove Gemini Watermarks Instantly.
+      </h1>
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed opacity-90">
+        Restore your generated images to their original glory.<br>
+        Safe, 100% private processing happens directly in your browser.
+      </p>
+      
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex justify-center">
+        <svg class="w-6 h-6 text-indigo-400 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto mb-24 reveal-on-scroll" id="dropSection">
+      <div 
+        id="dropZone"
+        class="glass-card group relative rounded-[2.5rem] p-16 border-2 border-dashed border-gray-700 flex flex-col items-center justify-center transition-all cursor-pointer overflow-hidden shadow-2xl shadow-indigo-500/5"
+      >
+        <input type="file" id="fileInput" class="hidden" accept="image/*" multiple>
+        
+        <div class="relative z-10 flex flex-col items-center">
+          <div class="w-24 h-24 rounded-3xl bg-gray-800/50 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-indigo-600/20 group-hover:text-indigo-400 transition-all duration-700 ease-out">
+            <svg class="w-12 h-12 text-gray-400 group-hover:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+            </svg>
+          </div>
+          <h3 class="text-3xl font-bold mb-3 text-white">Drop your Gemini images here</h3>
+          <p class="text-gray-500 font-medium text-lg">Click to browse or drag & drop files</p>
+        </div>
+
+        <div id="uploadProgress" class="absolute inset-0 bg-gray-900/95 z-20 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
+          <div class="w-72 h-2.5 bg-gray-800 rounded-full overflow-hidden mb-6 shadow-inner">
+            <div id="progressBar" class="w-0 h-full bg-gradient-to-r from-indigo-600 to-violet-500 transition-all duration-300"></div>
+          </div>
+          <p id="progressStatus" class="text-indigo-400 font-bold text-sm tracking-widest animate-pulse-soft">REMOVING WATERMARK...</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="resultsArea" class="hidden space-y-12">
+      <div class="flex items-center justify-between border-b border-white/5 pb-4">
+        <h2 class="text-2xl font-bold flex items-center gap-3 text-white">
+          <span class="w-2 h-8 bg-indigo-500 rounded-full"></span>
+          Processed Results
+        </h2>
+        <div class="flex gap-3">
+          <button id="resetAll" class="px-5 py-2 rounded-xl border border-white/10 text-gray-400 hover:text-white hover:bg-white/5 transition-all font-semibold text-sm">
+            Clear All
+          </button>
+          <button id="downloadAll" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/20 transition-all font-semibold text-sm">
+            Download
+          </button>
+        </div>
+      </div>
+
+      <div id="cardsGrid" class="grid grid-cols-1 gap-12"></div>
+    </div>
+
+    <div id="features" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+      <div class="glass-card p-8 rounded-3xl">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-6">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+        </div>
+        <h4 class="text-xl font-bold mb-3 text-white">Local Processing</h4>
+        <p class="text-gray-400 leading-relaxed text-sm">Your files never touch our servers. All watermark detection and removal happens 100% inside your browser.</p>
+      </div>
+      <div class="glass-card p-8 rounded-3xl">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-6">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        </div>
+        <h4 class="text-xl font-bold mb-3 text-white">AI-Aware Detection</h4>
+        <p class="text-gray-400 leading-relaxed text-sm">Our algorithm specifically targets Gemini's unique alpha-blended watermarks, ensuring minimal artifacting.</p>
+      </div>
+      <div class="glass-card p-8 rounded-3xl">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-6">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <h4 class="text-xl font-bold mb-3 text-white">Lossless Quality</h4>
+        <p class="text-gray-400 leading-relaxed text-sm">Maintains the original resolution and color profile of your AI-generated art. No unnecessary re-compression.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-white/5 py-12 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-gray-500 text-sm mb-4">GeminiFix is an independent tool and is not affiliated with Google or Gemini.</p>
+      <p class="text-gray-400 text-sm font-bold tracking-widest uppercase">© Amarokdevs</p>
+    </div>
+  </footer>
+
+  <script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const resultsArea = document.getElementById('resultsArea');
+    const cardsGrid = document.getElementById('cardsGrid');
+    const progressOverlay = document.getElementById('uploadProgress');
+    const progressBar = document.getElementById('progressBar');
+    const resetAll = document.getElementById('resetAll');
+    const downloadAll = document.getElementById('downloadAll');
+    const dropSection = document.getElementById('dropSection');
+
+    const observerOptions = {
+      root: null,
+      threshold: 0,
+      rootMargin: "-10% 0px -10% 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          if (entry.boundingClientRect.top > 0) {
+            entry.target.classList.remove('active');
+          }
+        }
+      });
+    }, observerOptions);
+
+    if (window.scrollY > 100) dropSection.classList.add('active');
+    observer.observe(dropSection);
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 50) {
+        dropSection.classList.remove('active');
+      }
+    }, { passive: true });
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, e => {
+        e.preventDefault();
+        e.stopPropagation();
+      }, false);
+    });
+
+    dropZone.addEventListener('dragenter', () => dropZone.classList.add('drop-zone-active'));
+    dropZone.addEventListener('dragover', () => dropZone.classList.add('drop-zone-active'));
+    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drop-zone-active'));
+    dropZone.addEventListener('drop', (e) => {
+      dropZone.classList.remove('drop-zone-active');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+    resetAll.addEventListener('click', () => {
+      cardsGrid.innerHTML = '';
+      resultsArea.classList.add('hidden');
+      document.getElementById('features').classList.remove('hidden');
+    });
+
+    // Fix: Implement Download logic
+    downloadAll.addEventListener('click', () => {
+      const saveButtons = cardsGrid.querySelectorAll('button[onclick^="downloadSingle"]');
+      if (saveButtons.length === 0) return;
+      
+      saveButtons.forEach((btn, index) => {
+        // Delay each download slightly to avoid browser blocking multiple triggers
+        setTimeout(() => {
+          btn.click();
+        }, index * 200);
+      });
+    });
+
+    async function handleFiles(files) {
+      if (files.length === 0) return;
+      
+      resultsArea.classList.remove('hidden');
+      document.getElementById('features').classList.add('hidden');
+      progressOverlay.style.opacity = '1';
+      progressOverlay.style.pointerEvents = 'auto';
+
+      for (let i = 0; i < files.length; i++) {
+        const percent = ((i + 1) / files.length) * 100;
+        progressBar.style.width = percent + '%';
+        await processImage(files[i]);
+      }
+
+      setTimeout(() => {
+        progressOverlay.style.opacity = '0';
+        progressOverlay.style.pointerEvents = 'none';
+        progressBar.style.width = '0%';
+        window.scrollTo({ 
+            top: resultsArea.offsetTop - 100, 
+            behavior: 'smooth' 
+        });
+      }, 500);
+    }
+
+    function processImage(file) {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+
+            const patchWidth = Math.floor(img.width * 0.15);
+            const patchHeight = Math.floor(img.height * 0.1);
+            const startX = img.width - patchWidth;
+            const startY = img.height - patchHeight;
+
+            const sampleY = startY - 10;
+            if (sampleY > 0) {
+                const patchData = ctx.getImageData(startX, sampleY - patchHeight, patchWidth, patchHeight);
+                ctx.putImageData(patchData, startX, startY);
+                ctx.filter = 'blur(6px)';
+                ctx.drawImage(canvas, startX, startY, patchWidth, patchHeight, startX, startY, patchWidth, patchHeight);
+                ctx.filter = 'none';
+            }
+
+            const resultUrl = canvas.toDataURL('image/png');
+            addResultCard(file.name, e.target.result, resultUrl);
+            resolve();
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function addResultCard(filename, originalUrl, resultUrl) {
+      const card = document.createElement('div');
+      card.className = 'glass-card rounded-[3rem] overflow-hidden p-8 md:p-10 animate-in fade-in slide-in-from-bottom-8 duration-700';
+      card.innerHTML = `
+        <div class="flex flex-col lg:flex-row gap-10">
+          <div class="flex-1 space-y-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-[10px] font-bold uppercase tracking-wider">Before</span>
+              <p class="text-sm font-medium text-gray-500 truncate max-w-[200px]">${filename}</p>
+            </div>
+            <div class="aspect-square md:aspect-video checkerboard rounded-[2rem] overflow-hidden border border-white/5 relative group">
+              <img src="${originalUrl}" class="w-full h-full object-contain" alt="Original">
+            </div>
+          </div>
+          <div class="flex items-center justify-center">
+             <div class="hidden lg:flex w-14 h-14 rounded-full bg-indigo-500/10 text-indigo-500 items-center justify-center">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
+             </div>
+          </div>
+          <div class="flex-1 space-y-4">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 text-[10px] font-bold uppercase tracking-wider">Processed</span>
+              <button onclick="downloadSingle('${resultUrl}', 'cleaned-${filename}')" class="text-indigo-400 hover:text-indigo-300 transition-colors text-xs font-bold flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                SAVE IMAGE
+              </button>
+            </div>
+            <div class="aspect-square md:aspect-video checkerboard rounded-[2rem] overflow-hidden border border-indigo-500/20 shadow-2xl shadow-indigo-500/10 relative group">
+              <img src="${resultUrl}" class="w-full h-full object-contain" alt="Result">
+            </div>
+          </div>
+        </div>
+      `;
+      cardsGrid.appendChild(card);
+    }
+
+    window.downloadSingle = function(url, name) {
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+  </script>
+</body>
+</html>

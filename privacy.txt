@@ -1,0 +1,79 @@
+PRIVACY POLICY
+
+Project Name: GeminiFix
+Maintained by: AmarokDevs
+
+GeminiFix is designed with privacy as a core principle. This document explains how user data is handled.
+
+1. DATA COLLECTION
+
+GeminiFix does NOT collect, store, transmit, or share any personal data.
+
+- No user accounts
+- No analytics
+- No tracking
+- No cookies
+- No logging
+- No telemetry
+
+All processing happens locally in the user’s browser.
+
+2. IMAGE PROCESSING
+
+- Images are processed entirely on the client side.
+- Images are never uploaded to any server.
+- No image data is stored after processing.
+- No metadata is extracted, saved, or transmitted.
+
+Once the page is closed or refreshed, all image data is discarded.
+
+3. NETWORK REQUESTS
+
+GeminiFix does not make background network requests related to image processing.
+
+Any network activity (such as loading this project from GitHub Pages or a CDN) is limited to static assets required to run the application.
+
+4. THIRD-PARTY SERVICES
+
+GeminiFix does not integrate with:
+- Analytics providers
+- Advertising networks
+- Tracking scripts
+- External APIs for image processing
+
+Any third-party services used are limited to hosting or distribution (for example, GitHub).
+
+5. USERSCRIPTS
+
+If used as a userscript:
+- The script runs locally in the browser
+- No data is sent to external servers
+- No browsing activity is monitored or recorded
+
+6. DATA RETENTION
+
+GeminiFix does not retain any data.
+There is nothing to delete, export, or recover.
+
+7. CHILDREN’S PRIVACY
+
+GeminiFix does not knowingly collect any data from children under the age of 13.
+
+8. CHANGES TO THIS POLICY
+
+This privacy policy may be updated to reflect changes in the project.
+Updates will be published in the repository.
+
+9. CONTACT
+
+For questions or concerns regarding privacy, contact the project maintainer:
+
+AmarokDevs
+
+10. SUMMARY
+
+- 100% client-side
+- Zero data collection
+- Zero tracking
+- Zero uploads
+- Privacy-first by design
