@@ -1,426 +1,281 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gemini Watermark Remover | Professional AI Imagex Fix</title>
-  <meta name="description" content="Clean, professional Gemini AI watermark remover. Local browser processing ensures your privacy.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Gemini Watermark Remover</title>
+  <meta name="description" content="Free Gemini watermark remover tool to remove watermarks from Gemini images. — safe, private, and 100% browser-based.">
+  <meta name="keywords" content="Gemini watermark remover, remove Gemini watermark, Gemini AI image editor, Google AI watermark remover, Gemini watermark fix, watermark cleaner tool, Gemini watermark eraser, free AI watermark remover" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg class='h-10 w-10 text-indigo-500' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l-1.9 5.8-5.8 1.9 5.8 1.9 1.9 5.8 1.9-5.8 5.8-1.9-5.8-1.9z'/%3E%3C/svg%3E">
+
   
+  
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Plus Jakarta Sans', 'ui-sans-serif', 'system-ui'],
-          },
           colors: {
-            brand: {
-              50: '#f5f7ff',
-              100: '#ebf0fe',
-              200: '#dae3fd',
-              500: '#6366f1',
-              600: '#4f46e5',
-              700: '#4338ca',
-              900: '#1e1b4b',
-            }
+            primary: '#10B981',
+            'primary-hover': '#059669',
+            dark: '#1F2937',
+            success: '#10B981',
+            warn: '#F59E0B',
+            err: '#EF4444',
+            info: '#3B82F6',
           },
-          backgroundImage: {
-            'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z' fill='%23ffffff' fill-opacity='0.02'/%3E%3C/svg%3E\")",
+          boxShadow: {
+            'soft': '0 4px 20px -2px rgba(16, 185, 129, 0.1)',
+            'card': '0 0 20px rgba(0,0,0,0.05)'
           }
         }
       }
     }
   </script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #030712;
-      color: #f9fafb;
-      overflow-x: hidden;
-    }
+    body { font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
 
-    .glass {
-      background: rgba(17, 24, 39, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #10B981; border-radius: 4px; }
 
-    .glass-card {
-      background: rgba(31, 41, 55, 0.4);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    .step-arrow::after {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 15px solid #F3F4F6;
+      z-index: 10;
     }
-
-    .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.3);
-      background: rgba(31, 41, 55, 0.6);
+    @media (min-width: 768px) {
+      .step-item:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -24px;
+        top: 0;
+        bottom: 0;
+        width: 24px;
+        background-color: inherit;
+        clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+        z-index: 20;
+      }
+      .step-item:not(:first-child) {
+        clip-path: polygon(0% 0%, 200% 0%, 100% 100%, 0% 100%, 24px 50%);
+      }
     }
+    body.loading { opacity: 0; }
+    body { transition: opacity 0s; }
 
-    .checkerboard {
-      background-image: 
-        linear-gradient(45deg, #1f2937 25%, transparent 25%), 
-        linear-gradient(-45deg, #1f2937 25%, transparent 25%), 
-        linear-gradient(45deg, transparent 75%, #1f2937 75%), 
-        linear-gradient(-45deg, transparent 75%, #1f2937 75%);
-      background-size: 20px 20px;
-      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-      background-color: #111827;
+    .medium-zoom-overlay,
+    .medium-zoom-image--opened {
+      z-index: 999;
     }
-
-    .gradient-text {
-      background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      padding-bottom: 0.1em;
+    .medium-zoom-overlay {
+      backdrop-filter: blur(4px);
     }
-
-    .drop-zone-active {
-      border-color: #6366f1 !important;
-      background: rgba(99, 102, 241, 0.1) !important;
-      transform: scale(1.01);
-    }
-
-    @keyframes pulse-soft {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-
-    .animate-pulse-soft {
-      animation: pulse-soft 2s infinite ease-in-out;
-    }
-
-    .reveal-on-scroll {
-      opacity: 0;
-      transform: translateY(120px) scale(0.94);
-      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform, opacity;
-    }
-
-    .reveal-on-scroll.active {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #030712; }
-    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
   </style>
 </head>
-<body class="font-sans antialiased">
+<body class="bg-white text-gray-800 antialiased selection:bg-primary selection:text-white flex flex-col min-h-screen loading">
 
-  <div class="fixed inset-0 -z-10 bg-grid-pattern"></div>
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 -z-10 w-full max-w-7xl h-[600px] opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-colors-indigo-500)_0%,_transparent_70%)]"></div>
-
-  <header class="sticky top-0 z-50 glass border-b border-white/5">
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="m12 3-1.9 5.8-5.8 1.9 5.8 1.9 1.9 5.8 1.9-5.8 5.8-1.9-5.8-1.9Z"></path>
-          </svg>
-        </div>
-        <div class="flex flex-col">
-          <span class="text-lg font-bold tracking-tight leading-tight">GeminiFix</span>
-          <span class="text-[10px] uppercase tracking-widest text-indigo-400 font-bold">Pro Watermark Remover</span>
-        </div>
+      <div class="flex items-center gap-1">
+        <svg class="h-10 w-10 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m12 3-1.9 5.8-5.8 1.9 5.8 1.9 1.9 5.8 1.9-5.8 5.8-1.9-5.8-1.9Z"></path>
+        </svg>
+        <h1 class="text-sm font-bold tracking-tight text-primary md:text-xl">
+          <a href="./" class="hover:text-primary transition-colors" title="Gemini Watermark Remover">Gemini <span class="text-gray-700 font-medium">Watermark Remover</span></a>
+        </h1>
       </div>
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-        <a href="https://github.com/amarokdevs/GeminiFix/blob/main/README.md" target="_blank" class="hover:text-white transition-colors">How it works</a>
-        <a href="https://github.com/amarokdevs/GeminiFix/blob/main/privacy.txt" target="_blank" class="hover:text-white transition-colors">Privacy</a>
-        <a href="https://github.com/amarokdevs/GeminiFix.git" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 hover:bg-white/5 transition-all">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          Github
-        </a>
+      <nav class="flex gap-2 md:gap-6 text-sm font-medium text-gray-600 items-center">
+        <a href="userscript/gemini-watermark-remover.user.js" target="_blank" class="hidden md:inline-block hover:text-primary transition-colors" data-i18n="nav.userscript">油猴脚本</a>
+        <a href="https://allenkuo.medium.com/removing-gemini-ai-watermarks-a-deep-dive-into-reverse-alpha-blending-bbbd83af2a3f" target="_blank" rel="noopener noreferrer" class="hidden md:inline-block hover:text-primary transition-colors" data-i18n="nav.principle">去水印原理</a>
+        <a href="https://github.com/journey-ad/gemini-watermark-remover" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors">GitHub</a>
+        <button id="langSwitch" class="px-3 py-1 text-nowrap border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">EN</button>
       </nav>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
-    <div class="text-center mb-16 relative min-h-[80vh] flex flex-col justify-center items-center">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold mb-6">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-        </span>
-        V2.0 NOW LIVE - IMPROVED ALGORITHM
-      </div>
-      <h1 class="text-[7.5vw] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 gradient-text leading-[1.15] py-2 whitespace-nowrap overflow-hidden">
-        Remove Gemini Watermarks Instantly.
-      </h1>
-      <p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed opacity-90">
-        Restore your generated images to their original glory.<br>
-        Safe, 100% private processing happens directly in your browser.
-      </p>
+  <main class="flex-grow">
+    <section class="relative pt-16 pb-12 lg:pt-24 lg:pb-20 text-center px-4 overflow-hidden">
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-50 via-white to-white -z-10"></div>
       
-      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex justify-center">
-        <svg class="w-6 h-6 text-indigo-400 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-      </div>
-    </div>
+      <h2 class="bg-clip-text bg-gradient-to-br font-extrabold from-slate-900 mb-6 md:text-6xl text-3xl text-transparent to-slate-700 tracking-tighter" data-i18n="main.title">
+        Gemini AI 图像去水印
+      </h2>
+      <p class="text-base md:text-lg text-gray-500 max-w-2xl mx-auto mb-10" data-i18n="main.subtitle">
+        基于反向 Alpha 混合算法，纯浏览器本地处理，免费、极速、无损
+      </p>
 
-    <div class="max-w-4xl mx-auto mb-24 reveal-on-scroll" id="dropSection">
-      <div 
-        id="dropZone"
-        class="glass-card group relative rounded-[2.5rem] p-16 border-2 border-dashed border-gray-700 flex flex-col items-center justify-center transition-all cursor-pointer overflow-hidden shadow-2xl shadow-indigo-500/5"
-      >
-        <input type="file" id="fileInput" class="hidden" accept="image/*" multiple>
-        
-        <div class="relative z-10 flex flex-col items-center">
-          <div class="w-24 h-24 rounded-3xl bg-gray-800/50 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-indigo-600/20 group-hover:text-indigo-400 transition-all duration-700 ease-out">
-            <svg class="w-12 h-12 text-gray-400 group-hover:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
-            </svg>
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-soft p-2 md:p-3 border border-emerald-100">
+        <div id="uploadArea" class="group relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-emerald-200 rounded-xl bg-emerald-50/30 hover:bg-emerald-50 hover:border-emerald-400 transition-all cursor-pointer">
+          <div class="flex flex-col items-center justify-center pt-5 pb-6">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M 22.498 20.365 L 22.498 4.247 C 22.498 2.983 21.461 1.946 20.197 1.946 L 4.079 1.946 C 2.815 1.946 1.778 2.983 1.778 4.247 L 1.778 20.365 C 1.778 21.629 2.815 22.666 4.079 22.666 L 20.197 22.666 C 21.461 22.666 22.498 21.629 22.498 20.365 Z M 8.111 14.032 L 10.987 17.483 L 15.014 12.306 L 20.197 19.214 L 4.079 19.214 L 8.111 14.032 Z" fill="currentColor"></path></svg>
+            </div>
+            <p class="mb-2 text-lg font-medium text-gray-700" data-i18n="upload.text">点击选择 或 拖拽图片至此</p>
+            <p class="text-sm text-gray-400" data-i18n="upload.hint">支持 JPG, PNG, WebP</p>
           </div>
-          <h3 class="text-3xl font-bold mb-3 text-white">Drop your Gemini images here</h3>
-          <p class="text-gray-500 font-medium text-lg">Click to browse or drag & drop files</p>
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" multiple class="hidden" />
         </div>
+      </div>
+    </section>
 
-        <div id="uploadProgress" class="absolute inset-0 bg-gray-900/95 z-20 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500">
-          <div class="w-72 h-2.5 bg-gray-800 rounded-full overflow-hidden mb-6 shadow-inner">
-            <div id="progressBar" class="w-0 h-full bg-gradient-to-r from-indigo-600 to-violet-500 transition-all duration-300"></div>
+    <section class="max-w-6xl mx-auto px-4 mb-8 md:mb-20">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-10 text-center">
+        <div class="step-item relative bg-emerald-50 h-16 md:h-24 flex items-center justify-start px-6 md:pl-16 rounded-lg md:rounded-none md:first:rounded-l-lg md:last:rounded-r-lg">
+          <div class="w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 font-bold flex items-center justify-center mr-3 text-sm">1</div>
+          <span class="font-medium flex-1 md:flex-none text-gray-800" data-i18n="step.1">选择原始图片</span>
+        </div>
+        <div class="step-item relative bg-emerald-50 h-16 md:h-24 flex items-center justify-start px-6 md:pl-16 rounded-lg md:rounded-none">
+          <div class="w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 font-bold flex items-center justify-center mr-3 text-sm">2</div>
+          <span class="font-medium flex-1 md:flex-none text-gray-800" data-i18n="step.2">算法自动解析</span>
+        </div>
+        <div class="step-item relative bg-emerald-50 h-16 md:h-24 flex items-center justify-start px-6 md:pl-16 rounded-lg md:rounded-none md:last:rounded-r-lg">
+          <div class="w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 font-bold flex items-center justify-center mr-3 text-sm">3</div>
+          <span class="font-medium flex-1 md:flex-none text-gray-800" data-i18n="step.3">保存无水印图</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="singlePreview" class="max-w-7xl mx-auto px-4 pb-24" style="display: none;">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 space-y-8">
+          <div class="bg-white rounded-2xl shadow-card overflow-hidden border border-gray-100">
+            <div class="bg-gray-50 px-6 py-3 border-b border-gray-100 flex justify-between items-center">
+              <h3 class="font-semibold text-gray-700 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-400"></span> <span data-i18n="preview.original">原图预览</span>
+              </h3>
+              <span id="originalInfo" class="text-xs text-gray-400 font-mono"></span>
+            </div>
+            <div class="h-[200px] md:h-[500px] p-4 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iI2Y5ZmRmZCI+PHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZjJmMmYyIi8+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiNmMmYyZjIiLz48L3N2Zz4=')]">
+              <img id="originalImage" class="max-w-full max-h-full mx-auto rounded-lg shadow-sm block" data-zoomable />
+            </div>
           </div>
-          <p id="progressStatus" class="text-indigo-400 font-bold text-sm tracking-widest animate-pulse-soft">REMOVING WATERMARK...</p>
-        </div>
-      </div>
-    </div>
 
-    <div id="resultsArea" class="hidden space-y-12">
-      <div class="flex items-center justify-between border-b border-white/5 pb-4">
-        <h2 class="text-2xl font-bold flex items-center gap-3 text-white">
-          <span class="w-2 h-8 bg-indigo-500 rounded-full"></span>
-          Processed Results
-        </h2>
-        <div class="flex gap-3">
-          <button id="resetAll" class="px-5 py-2 rounded-xl border border-white/10 text-gray-400 hover:text-white hover:bg-white/5 transition-all font-semibold text-sm">
-            Clear All
-          </button>
-          <button id="downloadAll" class="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/20 transition-all font-semibold text-sm">
-            Download
-          </button>
+          <div id="processedSection" class="bg-white rounded-2xl shadow-card overflow-hidden border border-gray-100 ring-4 ring-emerald-50 scroll-mt-24" style="display: none;">
+            <div class="bg-emerald-50/50 px-6 py-3 border-b border-emerald-100 flex justify-between items-center">
+              <h3 class="font-semibold text-emerald-800 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-primary"></span> <span data-i18n="preview.result">处理结果</span>
+              </h3>
+              <span id="processedInfo" class="text-xs text-emerald-600 font-mono"></span>
+            </div>
+            <div class="h-[200px] md:h-[500px] p-4 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0iI2Y5ZmRmZCI+PHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZjJmMmYyIi8+PHJlY3QgeD0iMTAiIHk9IjEwIiB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9IiNmMmYyZjIiLz48L3N2Zz4=')]">
+              <img id="processedImage" class="max-w-full max-h-full mx-auto rounded-lg shadow-sm block" data-zoomable />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div id="cardsGrid" class="grid grid-cols-1 gap-12"></div>
-    </div>
+        <div class="w-full lg:w-80 flex-shrink-0">
+          <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sticky top-24">
+            <h4 class="text-lg font-bold text-gray-900 mb-6" data-i18n="panel.title">操作面板</h4>
 
-    <div id="features" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-      <div class="glass-card p-8 rounded-3xl">
-        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <div class="space-y-3">
+              <button id="downloadBtn" class="w-full py-3.5 px-4 bg-gray-900 hover:bg-black text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2" style="display: none;">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <span data-i18n="btn.download">下载结果</span>
+              </button>
+
+              <button id="resetBtn" class="w-full py-3.5 px-4 bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-gray-900 rounded-xl font-medium transition-all flex items-center justify-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                <span data-i18n="btn.reset">重置 / 更换图片</span>
+              </button>
+            </div>
+
+            <div id="statusMessage" class="mt-6 text-sm text-gray-500 min-h-[1.25rem]"></div>
+          </div>
         </div>
-        <h4 class="text-xl font-bold mb-3 text-white">Local Processing</h4>
-        <p class="text-gray-400 leading-relaxed text-sm">Your files never touch our servers. All watermark detection and removal happens 100% inside your browser.</p>
       </div>
-      <div class="glass-card p-8 rounded-3xl">
-        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+    </section>
+
+    <section id="multiPreview" class="max-w-7xl mx-auto px-4 pb-24 scroll-mt-24" style="display: none;">
+      <div class="mb-6 flex justify-between items-center">
+        <h3 class="text-xl font-bold text-gray-900">
+          <span id="progressText">处理进度: 0/0</span>
+        </h3>
+        <button id="downloadAllBtn" class="py-2.5 px-6 bg-gray-900 hover:bg-gray-800 text-white rounded-xl font-medium transition-all flex items-center gap-2" style="display: none;">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span data-i18n="btn.downloadAll">全部下载</span>
+        </button>
+      </div>
+      <div id="imageList" class="space-y-4"></div>
+    </section>
+
+    <section class="bg-gray-50 py-16 border-t border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-6 md:mb-12">
+          <h3 class="text-2xl font-bold text-gray-900" data-i18n="feature.title">功能特点</h3>
         </div>
-        <h4 class="text-xl font-bold mb-3 text-white">AI-Aware Detection</h4>
-        <p class="text-gray-400 leading-relaxed text-sm">Our algorithm specifically targets Gemini's unique alpha-blended watermarks, ensuring minimal artifacting.</p>
-      </div>
-      <div class="glass-card p-8 rounded-3xl">
-        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center mb-6">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+          <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-emerald-100 text-primary rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            </div>
+            <h4 class="text-lg font-bold text-gray-900 mb-2" data-i18n="feature.speed.title">极速处理</h4>
+            <p class="text-gray-500 text-sm leading-relaxed" data-i18n="feature.speed.desc">基于现代浏览器技术加速处理，毫秒级响应，无需等待排队</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h4 class="text-lg font-bold text-gray-900 mb-2" data-i18n="feature.privacy.title">隐私安全</h4>
+            <p class="text-gray-500 text-sm leading-relaxed" data-i18n="feature.privacy.desc">纯前端运行，图片数据不离机，绝不上传服务器</p>
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z M6 6l12 12"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-gray-900 mb-2" data-i18n="feature.free.title">完全免费</h4>
+            <p class="text-gray-500 text-sm leading-relaxed" data-i18n="feature.free.desc">无次数限制，无隐藏付费，即开即用</p>
+          </div>
         </div>
-        <h4 class="text-xl font-bold mb-3 text-white">Lossless Quality</h4>
-        <p class="text-gray-400 leading-relaxed text-sm">Maintains the original resolution and color profile of your AI-generated art. No unnecessary re-compression.</p>
       </div>
-    </div>
+    </section>
   </main>
 
-  <footer class="border-t border-white/5 py-12 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <p class="text-gray-500 text-sm mb-4">GeminiFix is an independent tool and is not affiliated with Google or Gemini.</p>
-      <p class="text-gray-400 text-sm font-bold tracking-widest uppercase">© Amarokdevs</p>
+  <footer class="bg-emerald-600 text-white py-6 md:pt-12 md:pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <div class="col-span-1 sm:col-span-2 lg:col-span-2">
+          <h5 class="text-2xl font-bold mb-4" data-i18n="header.title">Gemini Watermark Remover</h5>
+          <p class="text-emerald-100 text-sm max-w-sm" data-i18n="footer.desc">
+            Gemini 无损去水印工具，本工具仅供学习交流使用
+          </p>
+        </div>
+        <div>
+          <h6 class="font-bold mb-2 md:mb-4 text-emerald-100" data-i18n="footer.links">链接</h6>
+          <ul class="space-y-1 md:space-y-2 text-sm text-emerald-50">
+            <li><a href="terms.html" class="hover:text-white" data-i18n="footer.terms">使用条款</a></li>
+            <li><a href="https://github.com/journey-ad/gemini-watermark-remover" target="_blank" rel="noopener noreferrer" class="hover:text-white" data-i18n="footer.github">Github</a></li>
+            <li><a href="userscript/gemini-watermark-remover.user.js" target="_blank" class="hover:text-white" data-i18n="nav.userscript">油猴脚本</a></li>
+          </ul>
+        </div>
+        <div>
+          <h6 class="font-bold mb-2 md:mb-4 text-emerald-100" data-i18n="footer.tech">技术</h6>
+          <ul class="space-y-1 md:space-y-2 text-sm text-emerald-50">
+            <li><a href="https://allenkuo.medium.com/removing-gemini-ai-watermarks-a-deep-dive-into-reverse-alpha-blending-bbbd83af2a3f" target="_blank" rel="noopener noreferrer" class="hover:text-white" data-i18n="nav.principle">去水印原理</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-emerald-500 pt-8 text-center text-sm text-emerald-200">
+        <p data-i18n="footer.copyright">&copy; Gemini Watermark Remover. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <script>
-    const dropZone = document.getElementById('dropZone');
-    const fileInput = document.getElementById('fileInput');
-    const resultsArea = document.getElementById('resultsArea');
-    const cardsGrid = document.getElementById('cardsGrid');
-    const progressOverlay = document.getElementById('uploadProgress');
-    const progressBar = document.getElementById('progressBar');
-    const resetAll = document.getElementById('resetAll');
-    const downloadAll = document.getElementById('downloadAll');
-    const dropSection = document.getElementById('dropSection');
+  <div id="loadingOverlay" class="fixed inset-0 bg-white/80 backdrop-blur-sm z-[60] hidden flex items-center justify-center">
+    <div class="flex flex-col items-center">
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+      <p class="text-gray-600 font-medium" data-i18n="loading.text">正在处理...</p>
+    </div>
+  </div>
 
-    const observerOptions = {
-      root: null,
-      threshold: 0,
-      rootMargin: "-10% 0px -10% 0px"
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        } else {
-          if (entry.boundingClientRect.top > 0) {
-            entry.target.classList.remove('active');
-          }
-        }
-      });
-    }, observerOptions);
-
-    if (window.scrollY > 100) dropSection.classList.add('active');
-    observer.observe(dropSection);
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY < 50) {
-        dropSection.classList.remove('active');
-      }
-    }, { passive: true });
-
-    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-      dropZone.addEventListener(eventName, e => {
-        e.preventDefault();
-        e.stopPropagation();
-      }, false);
-    });
-
-    dropZone.addEventListener('dragenter', () => dropZone.classList.add('drop-zone-active'));
-    dropZone.addEventListener('dragover', () => dropZone.classList.add('drop-zone-active'));
-    dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drop-zone-active'));
-    dropZone.addEventListener('drop', (e) => {
-      dropZone.classList.remove('drop-zone-active');
-      handleFiles(e.dataTransfer.files);
-    });
-
-    dropZone.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
-    resetAll.addEventListener('click', () => {
-      cardsGrid.innerHTML = '';
-      resultsArea.classList.add('hidden');
-      document.getElementById('features').classList.remove('hidden');
-    });
-
-    // Fix: Implement Download logic
-    downloadAll.addEventListener('click', () => {
-      const saveButtons = cardsGrid.querySelectorAll('button[onclick^="downloadSingle"]');
-      if (saveButtons.length === 0) return;
-      
-      saveButtons.forEach((btn, index) => {
-        // Delay each download slightly to avoid browser blocking multiple triggers
-        setTimeout(() => {
-          btn.click();
-        }, index * 200);
-      });
-    });
-
-    async function handleFiles(files) {
-      if (files.length === 0) return;
-      
-      resultsArea.classList.remove('hidden');
-      document.getElementById('features').classList.add('hidden');
-      progressOverlay.style.opacity = '1';
-      progressOverlay.style.pointerEvents = 'auto';
-
-      for (let i = 0; i < files.length; i++) {
-        const percent = ((i + 1) / files.length) * 100;
-        progressBar.style.width = percent + '%';
-        await processImage(files[i]);
-      }
-
-      setTimeout(() => {
-        progressOverlay.style.opacity = '0';
-        progressOverlay.style.pointerEvents = 'none';
-        progressBar.style.width = '0%';
-        window.scrollTo({ 
-            top: resultsArea.offsetTop - 100, 
-            behavior: 'smooth' 
-        });
-      }, 500);
-    }
-
-    function processImage(file) {
-      return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const img = new Image();
-          img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-
-            const patchWidth = Math.floor(img.width * 0.15);
-            const patchHeight = Math.floor(img.height * 0.1);
-            const startX = img.width - patchWidth;
-            const startY = img.height - patchHeight;
-
-            const sampleY = startY - 10;
-            if (sampleY > 0) {
-                const patchData = ctx.getImageData(startX, sampleY - patchHeight, patchWidth, patchHeight);
-                ctx.putImageData(patchData, startX, startY);
-                ctx.filter = 'blur(6px)';
-                ctx.drawImage(canvas, startX, startY, patchWidth, patchHeight, startX, startY, patchWidth, patchHeight);
-                ctx.filter = 'none';
-            }
-
-            const resultUrl = canvas.toDataURL('image/png');
-            addResultCard(file.name, e.target.result, resultUrl);
-            resolve();
-          };
-          img.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      });
-    }
-
-    function addResultCard(filename, originalUrl, resultUrl) {
-      const card = document.createElement('div');
-      card.className = 'glass-card rounded-[3rem] overflow-hidden p-8 md:p-10 animate-in fade-in slide-in-from-bottom-8 duration-700';
-      card.innerHTML = `
-        <div class="flex flex-col lg:flex-row gap-10">
-          <div class="flex-1 space-y-4">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="px-2 py-0.5 rounded bg-gray-800 text-gray-400 text-[10px] font-bold uppercase tracking-wider">Before</span>
-              <p class="text-sm font-medium text-gray-500 truncate max-w-[200px]">${filename}</p>
-            </div>
-            <div class="aspect-square md:aspect-video checkerboard rounded-[2rem] overflow-hidden border border-white/5 relative group">
-              <img src="${originalUrl}" class="w-full h-full object-contain" alt="Original">
-            </div>
-          </div>
-          <div class="flex items-center justify-center">
-             <div class="hidden lg:flex w-14 h-14 rounded-full bg-indigo-500/10 text-indigo-500 items-center justify-center">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"></path></svg>
-             </div>
-          </div>
-          <div class="flex-1 space-y-4">
-            <div class="flex items-center justify-between mb-2">
-              <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400 text-[10px] font-bold uppercase tracking-wider">Processed</span>
-              <button onclick="downloadSingle('${resultUrl}', 'cleaned-${filename}')" class="text-indigo-400 hover:text-indigo-300 transition-colors text-xs font-bold flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                SAVE IMAGE
-              </button>
-            </div>
-            <div class="aspect-square md:aspect-video checkerboard rounded-[2rem] overflow-hidden border border-indigo-500/20 shadow-2xl shadow-indigo-500/10 relative group">
-              <img src="${resultUrl}" class="w-full h-full object-contain" alt="Result">
-            </div>
-          </div>
-        </div>
-      `;
-      cardsGrid.appendChild(card);
-    }
-
-    window.downloadSingle = function(url, name) {
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = name;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    };
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
