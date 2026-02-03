@@ -25,18 +25,11 @@ It uses a deterministic Reverse Alpha Blending algorithm instead of unreliable A
 <details open>
 <summary><strong>Click to Expand / Collapse</strong></summary>
 
-<p><strong>Lossless pixel diff</strong></p>
-<p><img src="docs/lossless_diff.webp"></p>
-
 <p><strong>Before / After</strong></p>
 
 | Original | Fixed |
 | :---: | :---: |
 | <img src="docs/1.webp" width="400"> | <img src="docs/unwatermarked_1.webp" width="400"> |
-| <img src="docs/2.webp" width="400"> | <img src="docs/unwatermarked_2.webp" width="400"> |
-| <img src="docs/3.webp" width="400"> | <img src="docs/unwatermarked_3.webp" width="400"> |
-| <img src="docs/4.webp" width="400"> | <img src="docs/unwatermarked_4.webp" width="400"> |
-| <img src="docs/5.webp" width="400"> | <img src="docs/unwatermarked_5.webp" width="400"> |
 
 </details>
 

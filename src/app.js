@@ -1,5 +1,5 @@
 import { WatermarkEngine } from './core/watermarkEngine.js';
-import i18n from './i18n.js';
+import dpk from './dpk.js';
 import { loadImage, checkOriginal, getOriginalStatus, setStatusMessage, showLoading, hideLoading } from './utils.js';
 import JSZip from 'jszip';
 import mediumZoom from 'medium-zoom';
@@ -31,8 +31,8 @@ const resetBtn = document.getElementById('resetBtn');
  */
 async function init() {
     try {
-        await i18n.init();
-        showLoading(i18n.t('status.loading'));
+        await dpk.init();
+        showLoading(dpk.t('status.loading'));
 
         engine = await WatermarkEngine.create();
 
@@ -143,9 +143,9 @@ async function processSingle(item) {
 
         const watermarkInfo = engine.getWatermarkInfo(img.width, img.height);
         originalInfo.innerHTML = `
-            <p>${i18n.t('info.size')}: ${img.width}×${img.height}</p>
-            <p>${i18n.t('info.watermark')}: ${watermarkInfo.size}×${watermarkInfo.size}</p>
-            <p>${i18n.t('info.position')}: (${watermarkInfo.position.x},${watermarkInfo.position.y})</p>
+            <p>${dpk.t('info.size')}: ${img.width}×${img.height}</p>
+            <p>${dpk.t('info.watermark')}: ${watermarkInfo.size}×${watermarkInfo.size}</p>
+            <p>${dpk.t('info.position')}: (${watermarkInfo.position.x},${watermarkInfo.position.y})</p>
         `;
 
         const result = await engine.removeWatermarkFromImage(img);
@@ -159,8 +159,8 @@ async function processSingle(item) {
         downloadBtn.onclick = () => downloadImage(item);
 
         processedInfo.innerHTML = `
-            <p>${i18n.t('info.size')}: ${img.width}×${img.height}</p>
-            <p>${i18n.t('info.status')}: ${i18n.t('info.removed')}</p>
+            <p>${dpk.t('info.size')}: ${img.width}×${img.height}</p>
+            <p>${dpk.t('info.status')}: ${dpk.t('info.removed')}</p>
         `;
 
         zoom.detach();
@@ -184,11 +184,11 @@ function createImageCard(item) {
                 </div>
                 <div class="flex-1 p-4 flex flex-col min-w-0">
                     <h4 class="font-semibold text-sm text-gray-900 mb-2 truncate">${item.name}</h4>
-                    <div class="text-xs text-gray-500" id="status-${item.id}">${i18n.t('status.pending')}</div>
+                    <div class="text-xs text-gray-500" id="status-${item.id}">${dpk.t('status.pending')}</div>
                 </div>
             </div>
             <div class="w-full md:w-auto ml-auto flex-shrink-0 p-2 md:p-4 flex items-center justify-center">
-                <button id="download-${item.id}" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-xs md:text-sm hidden">${i18n.t('btn.download')}</button>
+                <button id="download-${item.id}" class="px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-xs md:text-sm hidden">${dpk.t('btn.download')}</button>
             </div>
         </div>
     `;
@@ -210,7 +210,7 @@ async function processQueue() {
             if (item.status !== 'pending') return;
 
             item.status = 'processing';
-            updateStatus(item.id, i18n.t('status.processing'));
+            updateStatus(item.id, dpk.t('status.processing'));
 
             try {
                 const result = await engine.removeWatermarkFromImage(item.originalImg);
@@ -223,9 +223,9 @@ async function processQueue() {
                 item.status = 'completed';
                 const watermarkInfo = engine.getWatermarkInfo(item.originalImg.width, item.originalImg.height);
 
-                updateStatus(item.id, `<p>${i18n.t('info.size')}: ${item.originalImg.width}×${item.originalImg.height}</p>
-            <p>${i18n.t('info.watermark')}: ${watermarkInfo.size}×${watermarkInfo.size}</p>
-            <p>${i18n.t('info.position')}: (${watermarkInfo.position.x},${watermarkInfo.position.y})</p>`, true);
+                updateStatus(item.id, `<p>${dpk.t('info.size')}: ${item.originalImg.width}×${item.originalImg.height}</p>
+            <p>${dpk.t('info.watermark')}: ${watermarkInfo.size}×${watermarkInfo.size}</p>
+            <p>${dpk.t('info.position')}: (${watermarkInfo.position.x},${watermarkInfo.position.y})</p>`, true);
 
                 const downloadBtn = document.getElementById(`download-${item.id}`);
                 downloadBtn.classList.remove('hidden');
@@ -243,7 +243,7 @@ async function processQueue() {
                 }).catch(() => {});
             } catch (error) {
                 item.status = 'error';
-                updateStatus(item.id, i18n.t('status.failed'));
+                updateStatus(item.id, dpk.t('status.failed'));
                 console.error(error);
             }
         }));
@@ -260,7 +260,7 @@ function updateStatus(id, text, isHtml = false) {
 }
 
 function updateProgress() {
-    progressText.textContent = `${i18n.t('progress.text')}: ${processedCount}/${imageQueue.length}`;
+    progressText.textContent = `${dpk.t('progress.text')}: ${processedCount}/${imageQueue.length}`;
 }
 
 function downloadImage(item) {
