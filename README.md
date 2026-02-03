@@ -48,9 +48,15 @@ GeminiFix modifies image pixel data. Although designed to be deterministic and s
 By using this tool, you accept full responsibility for any outcomes.
 The author is not liable for data loss or unintended image modification.
 
-Note:
-Disable canvas or fingerprint defender extensions (for example: Canvas Fingerprint Defender) to avoid processing issues.
-Related issue: https://github.com/journey-ad/gemini-watermark-remover/issues/3
+Privacy Notice:
+GeminiFix is designed to operate entirely on the client side.
+
+For transparency about how data is handled, please review the Privacy Policy:
+https://github.com/amarokdevs/GeminiFix/blob/main/privacy.txt
+
+To ensure correct image processing, browser extensions that modify or protect canvas output
+(such as canvas or fingerprint defender extensions) should be disabled while using GeminiFix.
+These extensions may interfere with pixel-level operations.
 
 ---
 
@@ -119,15 +125,21 @@ By capturing the watermark over known solid backgrounds, GeminiFix reconstructs 
 
 ## 📁 Project Structure
 
-geminifix/
+gemini-watermark-remover/
+├── .idx/
+│   └── dev.nix
+│
+├── docs/
+│   ├── 1.webp
+│   └── unwatermarked_1.webp
+│
+├── node_modules/
+│
 ├── public/
-
 │   ├── index.html
 
 │   └── terms.html
-
 ├── src/
-
 │   ├── core/
 
 │   │   ├── alphaMap.js
@@ -135,26 +147,19 @@ geminifix/
 │   │   ├── blendModes.js
 
 │   │   └── watermarkEngine.js
-
 │   ├── assets/
-
-│   │   ├── bg_.png
-
-│   │   └── bg_.png
-
-│   ├── dpk/
-
+│   │   ├── bg_48.png
+│   │   └── bg_96.png
+│   ├── i18n/
 │   ├── userscript/
 
 │   ├── app.js
 
 │   └── i18n.js
+│
 ├── dist/
-
 ├── build.js
-
 └── package.json
-
 
 ---
 
