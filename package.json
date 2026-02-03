@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node build.js",
     "build": "NODE_ENV=production node build.js",
-    "serve": "npx serve dist"
+    "serve": "npx serve public"
   },
   "dependencies": {
     "exifr": "^7.1.3",
