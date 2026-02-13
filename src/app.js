@@ -1,6 +1,7 @@
 import { WatermarkEngine } from './core/watermarkEngine.js';
 import dpk from './dpk.js';
 import { loadImage, checkOriginal, getOriginalStatus, setStatusMessage, showLoading, hideLoading } from './utils.js';
+import { initUI } from './ui.js';
 import JSZip from 'jszip';
 import mediumZoom from 'medium-zoom';
 
@@ -38,6 +39,7 @@ async function init() {
 
         hideLoading();
         setupEventListeners();
+        initUI();
 
         zoom = mediumZoom('[data-zoomable]', {
             margin: 24,
