@@ -41,7 +41,5 @@
   "info.position": "Position",
   "info.status": "Status",
   "info.removed": "Watermark Removed",
-  "original.not_gemini": "",
-  "original.not_original": "",
   "original.pass": "✅ This image made with Gemini. Lossless processing supported."
 }
